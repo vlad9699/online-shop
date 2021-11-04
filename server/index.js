@@ -5,6 +5,8 @@ import cors from 'cors'
 import fileUplod from 'express-fileupload'
 import router from './router/index.js'
 import errorHandlingMiddleware from './middleware/ErrorHandlingMiddleware.js'
+// import models from './models/models.js'
+
 
 dotenv.config()
 

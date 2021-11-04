@@ -34,7 +34,7 @@ export const Brand = DB.define('brand', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: { type: DataTypes.STRING, unique: true, allowNull: false },
 })
-const Rating = DB.define('rating', {
+export const Rating = DB.define('rating', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   rate: { type: DataTypes.INTEGER, allowNull: false },
 })
@@ -49,6 +49,13 @@ const TypeBrand = DB.define('type_brand', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
 })
 
+export const Token = DB.define('token', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  token: { type: DataTypes.STRING, allowNull: false},
+})
+
+User.hasOne(Token)
+Token.belongsTo(User)
 
 User.hasOne(Basket)
 Basket.belongsTo(User)
@@ -87,4 +94,5 @@ export default {
   TypeBrand,
   Brand,
   Rating,
+  Token,
 }
