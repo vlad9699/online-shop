@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import AppRouter from './components/AppRouter'
+import ThemeConfig from './theme'
 
-function App() {
+const App: FC = () => {
   return (
-    <div className="App">
-      <h1>HELLO WORD</h1>
-    </div>
-  );
+    <ThemeConfig>
+      <BrowserRouter>
+        <AppRouter/>
+      </BrowserRouter>
+    </ThemeConfig>
+  )
 }
 
-export default App;
+export default App
