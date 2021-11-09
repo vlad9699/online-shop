@@ -11,6 +11,8 @@ import NavSection from '../../components/NavSection'
 import MHidden from './MHidden'
 //
 import sidebarConfig from './SidebarConfig'
+import { useAppSelector } from '../../hooks/redux'
+import { selectStatus, selectUser } from '../../components/Auth/selectors'
 
 // ----------------------------------------------------------------------
 
@@ -47,6 +49,9 @@ MainSidebar.propTypes = {
 export default function MainSidebar({ isOpenSidebar, onCloseSidebar }: any) {
   const { pathname } = useLocation()
 
+  const user = useAppSelector(selectUser)
+  const status = useAppSelector(selectStatus)
+
   useEffect(() => {
     if (isOpenSidebar) {
       onCloseSidebar()
@@ -67,19 +72,31 @@ export default function MainSidebar({ isOpenSidebar, onCloseSidebar }: any) {
         </Box>
       </Box>
 
-      <Box sx={{ mb: 5, mx: 2.5 }}>
+      <Box sx={{ mb: 5, px: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
-          <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL"/>
-            <Box sx={{ ml: 2 }}>
-              <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
-                {account.displayName}
-              </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                {account.email}
-              </Typography>
-            </Box>
-          </AccountStyle>
+          {!status
+            ?
+            <AccountStyle>
+              <Box sx={{ ml: 2 }} maxWidth="170px">
+                <Typography textAlign="center" variant="subtitle1" sx={{ color: 'text.green' }}>
+                  Welcome to our first SHOP
+                </Typography>
+              </Box>
+            </AccountStyle>
+            :
+            <AccountStyle>
+              <Avatar src={account.photoURL} alt="photoURL"/>
+              <Box sx={{ ml: 2 }} maxWidth="170px">
+                <Typography variant="subtitle2" sx={{ color: 'text.primary' }}>
+                  {user.firstName} {user.lastName}
+                </Typography>
+                <Typography variant="body2"  sx={{ color: 'text.secondary'}} noWrap>
+                  {user.email}
+                </Typography>
+              </Box>
+            </AccountStyle>
+          }
+
         </Link>
       </Box>
 

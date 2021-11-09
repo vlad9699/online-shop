@@ -2,7 +2,6 @@ import Basket from './pages/Basket'
 import Shop from './pages/Shop'
 import ItemPage from './pages/ItemPage'
 import { Navigate, useRoutes } from 'react-router-dom'
-import DashboardLayout from './layouts/main'
 import MainLayout from './layouts/main'
 import Login from './pages/Login'
 import Register from './pages/Register'
@@ -17,7 +16,7 @@ export const Router = () => {
       path: '/shop',
       element: <MainLayout/>,
       children: [
-        { element: <Navigate to="/shop/main" replace /> },
+        { path: '/shop', element: <Navigate to="/shop/main" /> },
         { path: 'main', element: <Shop/> },
         { path: 'basket', element: <Basket/> },
         { path: 'product/:id', element: <ItemPage/> },

@@ -14,7 +14,9 @@ const generateJwt = (id, email, role) => {
 class UserController {
   async registration(req, res, next) {
     try {
-      const { email, password } = req.body
+      const { email, password, firstName, lastName } = req.body
+      console.log(1212, req.body)
+      console.log(111, email, password)
 
       if (!email || !password) return next(ApiError.badRequest('Bad email or password'))
 
@@ -24,11 +26,11 @@ class UserController {
       // const role = 'USER'
 
       const hashPassword = await bcrypt.hash(password, 5)
-      const user = await User.create({ email, password: hashPassword })
+      const user = await User.create({ email, firstName, lastName, password: hashPassword })
 
       const basket = await Basket.create({ userId: user.id })
       const token = generateJwt(user.id, user.email, user.role)
-      const tokenDB = await Token.create({token: token, userId: user.id})
+      const tokenDB = await Token.create({ token: token, userId: user.id })
       return res.json({ token })
     } catch (e) {
       next(ApiError.badRequest(e.message))
@@ -38,15 +40,16 @@ class UserController {
   async login(req, res, next) {
     try {
       const { email, password } = req.body
+      // if (!email || !password) return next(ApiError.badRequest('Bad email or password'))
 
       const user = await User.findOne({ where: { email } })
-      if (!user) return next(ApiError.internal('User is not find'))
+      if (!user) return next(ApiError.internal('User doesn`t find'))
 
       const comparePass = bcrypt.compareSync(password, user.password)
       if (!comparePass) return next(ApiError.internal('Password is wrong'))
 
       const token = generateJwt(user.id, user.email, user.role)
-      const tokenDB = await Token.update({token: token}, {where: {userId: user.id}})
+      const tokenDB = await Token.update({ token: token }, { where: { userId: user.id } })
       return res.json({ token })
 
     } catch (e) {
@@ -55,10 +58,12 @@ class UserController {
   }
 
   async check(req, res, next) {
-    const { id } = req.query
+    const { id } = req.user
     if (!id) return next(ApiError.badRequest('No ID set'))
-    res.json(id)
-
+    const user = await User.findOne({where: {id: id}, attributes: { exclude: ['password', 'id'] }})
+    console.log(user)
+    if(!user) return next(ApiError.internal('You are not register'))
+    res.json(user)
   }
 }
 
