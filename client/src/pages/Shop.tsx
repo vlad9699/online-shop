@@ -10,6 +10,7 @@ import Page from '../components/Page';
 import PropTypes from 'prop-types';
 // material
 import { Grid } from '@mui/material';
+import ProductList from '../components/products/ProductList'
 // import ShopProductCard from './ProductCard';
 
 export default function Shop() {
@@ -76,27 +77,27 @@ export default function Shop() {
   );
 }
 
-const products = [
-  {title: 'Nike airmax', desc: 'ultraGood', price: '20'},
-  {title: 'Nike airmax',desc: 'ultraGood', price: '20'},
-  {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
-  {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
-  {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
-  {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
+// const products = [
+//   {title: 'Nike airmax', desc: 'ultraGood', price: '20'},
+//   {title: 'Nike airmax',desc: 'ultraGood', price: '20'},
+//   {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
+//   {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
+//   {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
+//   {title: 'Nike airmax', desc: 'ultraGood',price: '20'},
+//
+// ]
 
-]
-
-function ProductList() {
-  return (
-    <Grid container spacing={3}>
-      {products.map((product:any) => (
-        <Grid key={product.length} item xs={12} sm={6} md={3}>
-          <h1>{product.title}</h1>
-          <p>{product.desc}</p>
-          <p>{product.price}</p>
-          {/*<ShopProductCard product={product} />*/}
-        </Grid>
-      ))}
-    </Grid>
-  );
-}
+// function ProductList() {
+//   return (
+//     <Grid container spacing={3}>
+//       {products.map((product:any) => (
+//         <Grid key={product.length} item xs={12} sm={6} md={3}>
+//           <h1>{product.title}</h1>
+//           <p>{product.desc}</p>
+//           <p>{product.price}</p>
+//           {/*<ShopProductCard product={product} />*/}
+//         </Grid>
+//       ))}
+//     </Grid>
+//   );
+// }
