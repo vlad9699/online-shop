@@ -59,9 +59,10 @@ class UserController {
 
   async check(req, res, next) {
     const { id } = req.user
+    // console.log(1213123, req.user)
     if (!id) return next(ApiError.badRequest('No ID set'))
     const user = await User.findOne({where: {id: id}, attributes: { exclude: ['password', 'id'] }})
-    console.log(user)
+    console.log(213123,user)
     if(!user) return next(ApiError.internal('You are not register'))
     res.json(user)
   }

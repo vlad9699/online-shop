@@ -63,7 +63,6 @@ const RootStyle = styled('span')(({ theme, ownerState }:any) => {
 // ----------------------------------------------------------------------
 
 export default function Label({ color = 'default', variant = 'ghost', children, ...other }:any) {
-  console.log(children)
   return (
     <RootStyle ownerState={{ color, variant }} {...other}>
       {children}

@@ -4,11 +4,14 @@ import twitterFill from '@iconify/icons-eva/twitter-fill';
 import facebookFill from '@iconify/icons-eva/facebook-fill';
 // material
 import { Stack, Button, Divider, Typography } from '@mui/material';
+import axios from 'axios'
 
 // ----------------------------------------------------------------------
 
 export default function AuthSocial() {
   const handleClickGoogle = () => {
+    // fetch('http://localhost:8000/auth/google', {credentials: 'include'})
+    // axios.get('http://localhost:8000/auth/google', {withCredentials: true,})
     window.open('http://localhost:8000/auth/google', '_self')
   }
   return (

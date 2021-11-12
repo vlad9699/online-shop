@@ -53,7 +53,7 @@ const TypeBrand = DB.define('type_brand', {
 
 export const Token = DB.define('token', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  token: { type: DataTypes.STRING, allowNull: false},
+  token: { type: DataTypes.STRING(1000), allowNull: false},
 })
 
 User.hasOne(Token)

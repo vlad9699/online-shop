@@ -13,6 +13,7 @@ import MHidden from './MHidden'
 import sidebarConfig from './SidebarConfig'
 import { useAppSelector } from '../../hooks/redux'
 import { selectStatus, selectUser } from '../../components/Auth/selectors'
+import axios from 'axios'
 
 // ----------------------------------------------------------------------
 
@@ -41,10 +42,10 @@ const AccountStyle = styled('div')(({ theme }: any) => ({
 
 // ----------------------------------------------------------------------
 
-MainSidebar.propTypes = {
-  isOpenSidebar: PropTypes.bool,
-  onCloseSidebar: PropTypes.func,
-}
+// MainSidebar.propTypes = {
+//   isOpenSidebar: PropTypes.bool,
+//   onCloseSidebar: PropTypes.func,
+// }
 
 export default function MainSidebar({ isOpenSidebar, onCloseSidebar }: any) {
   const { pathname } = useLocation()
@@ -58,6 +59,9 @@ export default function MainSidebar({ isOpenSidebar, onCloseSidebar }: any) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
+  const reqLogout = async () => {
+    const res = await axios.get('http://localhost:8000/auth/logout', {withCredentials: true})
+  }
 
   const renderContent = (
     <Scrollbar
@@ -132,14 +136,18 @@ export default function MainSidebar({ isOpenSidebar, onCloseSidebar }: any) {
           </Box>
           <Box sx ={{display: 'flex', gap: '10px'}}>
             <Button
-              href="/shop"
+              // href="/shop"
               fullWidth
               // target="_blank"
               variant="contained"
+              onClick={reqLogout}
+
             >
               LogIn
             </Button>
             <Button
+              component={RouterLink}
+              to="/register"
               fullWidth
               variant="contained"
             >
